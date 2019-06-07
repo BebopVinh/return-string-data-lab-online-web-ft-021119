@@ -1,7 +1,9 @@
 <% @products.each do |p| %>
-   <p><%= p.name %></p> 
-   <p id="description-<%=p.id%>"> <%= truncate(p.description) %> </p>
+   <p><%= p.name %></p>
+   <p><%= truncate(p.description) %> </p>
+   <p id="description-<%=p.id%>"> 
    <button class="js-more" data-id="<%= p.id %>" id="More Info">More Info</button>
+   </p>
 <% end %>
 
 <script type="text/javascript" charset="utf-8">
