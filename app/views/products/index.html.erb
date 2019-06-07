@@ -1,15 +1,21 @@
-<h1>Products Index</h1>
+<% @products.each do |p| %>
+   <p><%= p.name %></p> 
+   <p id="description-<%=p.id%>"> <%= truncate(p.description) %> </p>
+   <button class="js-more" data-id="<%= p.id %>" id="More Info">More Info</button>
+<% end %>
 
-<ul>
-   <% @products.each do |p| %>
-      <li>
-         <%= p.name %> <br>
-         <div id="description-<%=p.id%>">
-            <p><%= truncate(p.description) %></p>
-         </div>
-         <button class="js-more" data-id="<%= p.id %>" name="More Info">More Info</button>
-      </li>
-      <br>
-   <% end %>
-</ul>
-
+<script type="text/javascript" charset="utf-8">
+   $(function () {
+      $(".js-more").on('click', function() {
+         var id = $(this).data("id")
+         $.get(`/products/${id}/description`, function (data1) {
+            $.get(`/products/${id}/inventory`, function (data2) {
+               var inv = (data2 === "false" ? "Sold Out" : "Available")
+               var output = `<p>${data1} </p>` + inv
+               $(`#description-${id}`).html(output)
+               console.log(output)
+            })
+         })
+      })
+   })
+</script>
