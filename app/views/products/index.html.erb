@@ -1,1 +1,15 @@
+<h1>Products Index</h1>
+
+<ul>
+   <% @products.each do |p| %>
+      <li>
+         <%= p.name %> <br>
+         <div id="description-<%=p.id%>">
+            <p><%= truncate(p.description) %></p>
+         </div>
+         <button class="js-more" data-id="<%= p.id %>" name="More Info">More Info</button>
+      </li>
+      <br>
+   <% end %>
+</ul>
 
